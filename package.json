@@ -1,7 +1,7 @@
 {
   "scripts": {
     "inits": "gitbook init",
-    "build": "gitbook build ./ ./docs/"
+    "build": "gitbook build ./src ./docs/"
   },
   "dependencies": {
     "gitbook-cli": "^2.3.2"
