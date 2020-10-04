@@ -1,0 +1,3 @@
+# 1. 介绍
+WebGPU是主要浏览器供应商正在开发的一种现代Web图形API。与WebGL相比，WebGPU提供了对GPU的更直接控制，允许应用程序更有效地利用硬件，类似于Vulkan和DirectX12。WebGPU还公开了WebGL中不可用的其他GPU功能，例如计算着色器（compute shader）和存储缓冲区（storage buffer），从而可以在网页上实现强大的GPU计算应用程序。与从OpenGL切换到Vulkan一样，WebAPI给用户带来的复杂性要大于WebGL，尽管API在复杂性和可用性之间取得了很好的平衡，并且总体上很好用。在本教程中，我们将从头开始学习WebGPU的关键技术，其目标是从零到基本的渲染引擎实现。
+由于渲染引擎是个复杂的系统，让我们先从最简单的画一个三角形入手，逐步掌握WebGPU相关的技术以及图形学原理。

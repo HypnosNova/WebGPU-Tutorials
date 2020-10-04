@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "inits": "gitbook init",
+    "build": "gitbook build"
+  },
+  "dependencies": {
+    "gitbook-cli": "^2.3.2"
+  }
+}
