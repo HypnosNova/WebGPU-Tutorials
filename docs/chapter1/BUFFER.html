@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>1. 基础绘图 · GitBook</title>
+        <title>1.2 buffer数据传递 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="TRIANGLE.html" />
+    <link rel="next" href="../installation/gitbook-install.md" />
     
     
-    <link rel="prev" href="../" />
+    <link rel="prev" href="TRIANGLE.html" />
     
 
     </head>
@@ -102,7 +102,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="./">
             
                 <a href="./">
             
@@ -129,7 +129,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="BUFFER.html">
+        <li class="chapter active" data-level="1.2.2" data-path="BUFFER.html">
             
                 <a href="BUFFER.html">
             
@@ -319,7 +319,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >1. 基础绘图</a>
+        <a href=".." >1.2 buffer数据传递</a>
     </h1>
 </div>
 
@@ -334,9 +334,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="1-&#x4ECB;&#x7ECD;">1. &#x4ECB;&#x7ECD;</h1>
-<p>WebGPU&#x662F;&#x4E3B;&#x8981;&#x6D4F;&#x89C8;&#x5668;&#x4F9B;&#x5E94;&#x5546;&#x6B63;&#x5728;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x79CD;&#x73B0;&#x4EE3;Web&#x56FE;&#x5F62;API&#x3002;&#x4E0E;WebGL&#x76F8;&#x6BD4;&#xFF0C;WebGPU&#x63D0;&#x4F9B;&#x4E86;&#x5BF9;GPU&#x7684;&#x66F4;&#x76F4;&#x63A5;&#x63A7;&#x5236;&#xFF0C;&#x5141;&#x8BB8;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x66F4;&#x6709;&#x6548;&#x5730;&#x5229;&#x7528;&#x786C;&#x4EF6;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;Vulkan&#x548C;DirectX12&#x3002;WebGPU&#x8FD8;&#x516C;&#x5F00;&#x4E86;WebGL&#x4E2D;&#x4E0D;&#x53EF;&#x7528;&#x7684;&#x5176;&#x4ED6;GPU&#x529F;&#x80FD;&#xFF0C;&#x4F8B;&#x5982;&#x8BA1;&#x7B97;&#x7740;&#x8272;&#x5668;&#xFF08;compute shader&#xFF09;&#x548C;&#x5B58;&#x50A8;&#x7F13;&#x51B2;&#x533A;&#xFF08;storage buffer&#xFF09;&#xFF0C;&#x4ECE;&#x800C;&#x53EF;&#x4EE5;&#x5728;&#x7F51;&#x9875;&#x4E0A;&#x5B9E;&#x73B0;&#x5F3A;&#x5927;&#x7684;GPU&#x8BA1;&#x7B97;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;&#x4E0E;&#x4ECE;OpenGL&#x5207;&#x6362;&#x5230;Vulkan&#x4E00;&#x6837;&#xFF0C;WebAPI&#x7ED9;&#x7528;&#x6237;&#x5E26;&#x6765;&#x7684;&#x590D;&#x6742;&#x6027;&#x8981;&#x5927;&#x4E8E;WebGL&#xFF0C;&#x5C3D;&#x7BA1;API&#x5728;&#x590D;&#x6742;&#x6027;&#x548C;&#x53EF;&#x7528;&#x6027;&#x4E4B;&#x95F4;&#x53D6;&#x5F97;&#x4E86;&#x5F88;&#x597D;&#x7684;&#x5E73;&#x8861;&#xFF0C;&#x5E76;&#x4E14;&#x603B;&#x4F53;&#x4E0A;&#x5F88;&#x597D;&#x7528;&#x3002;&#x5728;&#x672C;&#x6559;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#x5B66;&#x4E60;WebGPU&#x7684;&#x5173;&#x952E;&#x6280;&#x672F;&#xFF0C;&#x5176;&#x76EE;&#x6807;&#x662F;&#x4ECE;&#x96F6;&#x5230;&#x57FA;&#x672C;&#x7684;&#x6E32;&#x67D3;&#x5F15;&#x64CE;&#x5B9E;&#x73B0;&#x3002;
-&#x7531;&#x4E8E;&#x6E32;&#x67D3;&#x5F15;&#x64CE;&#x662F;&#x4E2A;&#x590D;&#x6742;&#x7684;&#x7CFB;&#x7EDF;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x5148;&#x4ECE;&#x6700;&#x7B80;&#x5355;&#x7684;&#x753B;&#x4E00;&#x4E2A;&#x4E09;&#x89D2;&#x5F62;&#x5165;&#x624B;&#xFF0C;&#x9010;&#x6B65;&#x638C;&#x63E1;WebGPU&#x76F8;&#x5173;&#x7684;&#x6280;&#x672F;&#x4EE5;&#x53CA;&#x56FE;&#x5F62;&#x5B66;&#x539F;&#x7406;&#x3002;</p>
+                                <h1 id="12-buffer&#x6570;&#x636E;&#x4F20;&#x9012;">1.2 buffer&#x6570;&#x636E;&#x4F20;&#x9012;</h1>
+<p>&#x5728;1.1&#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7ED8;&#x5236;&#x7684;&#x4E09;&#x89D2;&#x5F62;&#x7684;&#x9876;&#x70B9;&#x6570;&#x636E;&#x662F;&#x5199;&#x6B7B;&#x5728;&#x7740;&#x8272;&#x5668;&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x3002;&#x800C;&#x7EDD;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#xFF0C;&#x9876;&#x70B9;&#x7684;&#x6570;&#x636E;&#x662F;&#x4ECE;&#x5916;&#x90E8;&#x83B7;&#x53D6;&#x7684;&#x3002;&#x4F8B;&#x5982;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x6E32;&#x67D3;&#x6A21;&#x578B;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x89E3;&#x6790;&#x9876;&#x70B9;&#x6570;&#x636E;&#xFF0C;&#x5C06;&#x6570;&#x636E;&#x4F20;&#x5165;&#x5230;&#x7740;&#x8272;&#x5668;&#x5185;&#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x3002;&#x56E0;&#x6B64;&#x672C;&#x7AE0;&#x8282;&#x9700;&#x8981;&#x4F18;&#x5316;&#x4E0A;&#x4E00;&#x8282;&#x7684;demo&#xFF0C;&#x505A;&#x5230;&#x5982;&#x4E0B;&#x529F;&#x80FD;&#xFF1A;</p>
+<pre><code>&#x901A;&#x8FC7;dat.gui&#x53EF;&#x4EE5;&#x52A8;&#x6001;&#x8C03;&#x6574;&#x4E09;&#x89D2;&#x5F62;&#x7684;&#x9876;&#x70B9;&#x4F4D;&#x7F6E;&#xFF0C;&#x4EE5;&#x53CA;&#x6539;&#x53D8;&#x4E09;&#x89D2;&#x5F62;&#x989C;&#x8272;&#x3002;
+</code></pre><h2 id="121-&#x9876;&#x70B9;buffer">1.2.1 &#x9876;&#x70B9;buffer</h2>
 
                                 
                                 </section>
@@ -364,12 +365,12 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 0. 介绍">
+                <a href="TRIANGLE.html" class="navigation navigation-prev " aria-label="Previous page: 1.1 画一个三角形">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="TRIANGLE.html" class="navigation navigation-next " aria-label="Next page: 1.1 画一个三角形">
+                <a href="../installation/gitbook-install.md" class="navigation navigation-next " aria-label="Next page: 1.3 纹理">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -380,7 +381,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1. 基础绘图","level":"1.2","depth":1,"next":{"title":"1.1 画一个三角形","level":"1.2.1","depth":2,"path":"chapter1/TRIANGLE.md","ref":"chapter1/TRIANGLE.md","articles":[]},"previous":{"title":"0. 介绍","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/README.md","mtime":"2020-10-04T08:31:02.348Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-04T09:20:23.878Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.2 buffer数据传递","level":"1.2.2","depth":2,"next":{"title":"1.3 纹理","level":"1.2.3","depth":2,"path":"installation/gitbook-install.md","ref":"installation/gitbook-install.md","articles":[]},"previous":{"title":"1.1 画一个三角形","level":"1.2.1","depth":2,"path":"chapter1/TRIANGLE.md","ref":"chapter1/TRIANGLE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter1/BUFFER.md","mtime":"2020-10-04T09:07:45.471Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-04T09:23:03.255Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

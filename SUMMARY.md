@@ -1,7 +1,7 @@
 * [0. 介绍](README.md)
 * [1. 基础绘图](chapter1/README.md)
    * [1.1 画一个三角形](chapter1/TRIANGLE.md)
-   * [1.2 buffer传递](installation/gitbook-install.md)
+   * [1.2 buffer数据传递](chapter1/BUFFER.md)
    * [1.3 纹理](installation/gitbook-install.md)
    * [1.4 拓扑](installation/gitbook-install.md)
 * [2. 矩阵变换](chapter2/README.md)
@@ -12,3 +12,4 @@
    * [3.1 几何体](chapter3/README.md)
    * [3.2 纹理与材质](chapter3/README.md)
    * [3.3 组](chapter3/README.md)
+   
