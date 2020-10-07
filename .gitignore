@@ -1,6 +1,7 @@
 node_modules
 dist
 .idea
+_book
 
 yarn-error.*
 yarn.lock

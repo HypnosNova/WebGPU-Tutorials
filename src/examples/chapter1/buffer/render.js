@@ -6,6 +6,34 @@ export async function init(canvas, useWGSL) {
 	const glslang = await glslangModule();
 	const context = canvas.getContext("gpupresent");
 
+	// 顶点位置数据
+	const verticesData = new Float32Array([
+		0, 0.5,
+		-0.5, -0.5,
+		0.5, -0.5,
+	]);
+	const verticesBuffer = device.createBuffer({
+		size: verticesData.byteLength,
+		usage: GPUBufferUsage.VERTEX,
+		mappedAtCreation: true
+	});
+	new Float32Array(verticesBuffer.getMappedRange()).set(verticesData);
+	verticesBuffer.unmap();	
+
+	// 顶点颜色数据rgb
+	const colorData = new Float32Array([
+		0, 0, 1,
+		0, 1, 0,
+		1, 0, 0
+	]);
+	const colorBuffer = device.createBuffer({
+		size: colorData.byteLength,
+		usage: GPUBufferUsage.VERTEX,
+		mappedAtCreation: true
+	});
+	new Float32Array(colorBuffer.getMappedRange()).set(colorData);
+	colorBuffer.unmap();	
+
 	// 设置交换链
 	const swapChainFormat = "bgra8unorm";
 	const swapChain = context.configureSwapChain({
@@ -23,8 +51,6 @@ export async function init(canvas, useWGSL) {
 			}),
 		entryPoint: "main",
 	};
-
-	console.log('---')
 
 	const fragmentStage = {
 		module: useWGSL
@@ -45,7 +71,24 @@ export async function init(canvas, useWGSL) {
 			{
 				format: swapChainFormat
 			}
-		]
+		],
+		vertexState: {
+			vertexBuffers:[{
+				arrayStride: 2 * verticesData.BYTES_PER_ELEMENT,
+				attributes:[{
+					shaderLocation: 0,
+					offset: 0,
+					format: "float2"
+				}]
+			}, {
+				arrayStride: 3 * colorData.BYTES_PER_ELEMENT,
+				attributes:[{
+					shaderLocation: 1,
+					offset: 0,
+					format: "float3"
+				}]
+			}]
+		}
 	});
 
 	function frame() {
@@ -63,6 +106,8 @@ export async function init(canvas, useWGSL) {
 
 		const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor);
 		passEncoder.setPipeline(pipeline);
+		passEncoder.setVertexBuffer(0, verticesBuffer);
+		passEncoder.setVertexBuffer(1, colorBuffer);
 		passEncoder.draw(3, 1, 0, 0);
 		passEncoder.endPass();
 
@@ -75,44 +120,49 @@ export async function init(canvas, useWGSL) {
 const glslShaders = {
 	vertex: `
 		#version 450
-		const vec2 pos[3] = vec2[3](vec2(0.0, 0.5), vec2(-0.5, -0.5), vec2(0.5, -0.5));
+		layout(location = 0) in vec2 a_position;
+		layout(location = 1) in vec3 a_color;
+
+		layout(location = 0) out vec3 fragColor;
 
 		void main() {
-			gl_Position = vec4(pos[gl_VertexIndex], 0.0, 1.0);
+			gl_Position = vec4(a_position, 0.0, 1.0);
+			fragColor = a_color;
 		}
 	`,
 	fragment: `
 		#version 450
+		layout(location = 0) in vec3 fragColor;
 		layout(location = 0) out vec4 outColor;
 
 		void main() {
-			outColor = vec4(1.0, 0.0, 0.0, 1.0);
+			outColor = vec4(fragColor, 1.0);
 		}
 	`
 };
 
 const wgslShaders = {
 	vertex: `
-		var<private> pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
-		vec2<f32>(0.0, 0.5),
-		vec2<f32>(-0.5, -0.5),
-		vec2<f32>(0.5, -0.5));
-
-		[[builtin(position)]] var<out> Position : vec4<f32>;
-		[[builtin(vertex_idx)]] var<in> VertexIndex : i32;
+		[[builtin(position)]] var<out> out_position : vec4<f32>;
+		[[location(0)]] var<out> out_color : vec3<f32>;
+		[[location(0)]] var<in> a_position : vec2<f32>;
+		[[location(1)]] var<in> a_color : vec3<f32>;
 		[[stage(vertex)]]
 		fn main() -> void {
-			Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+			out_position = vec4<f32>(a_position, 0.0, 1.0);
+			out_color = a_color;
 			return;
 		}
 	`,
 	fragment: `
-		[[location(0)]] var<out> outColor : vec4<f32>;
+		[[location(0)]] var<out> fragColor : vec4<f32>;
+		[[location(0)]] var<in> in_color : vec3<f32>;
 		[[stage(fragment)]]
 		fn main() -> void {
-			outColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);
+			fragColor = vec4<f32>(in_color, 1.0);
 			return;
 		}
+		# sadasdsa
 	`
 };
 
