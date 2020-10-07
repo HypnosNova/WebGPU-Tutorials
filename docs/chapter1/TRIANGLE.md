@@ -446,22 +446,22 @@ const wgslShaders = {
 		vec2<f32>(-0.5, -0.5),
 		vec2<f32>(0.5, -0.5));
 
-		[[builtin position]] var<out> Position : vec4<f32>;
-		[[builtin vertex_idx]] var<in> VertexIndex : i32;
+		[[builtin(position)]] var<out> Position : vec4<f32>;
+		[[builtin(vertex_idx)]] var<in> VertexIndex : i32;
+		[[stage(vertex)]]
 
-		fn vtx_main() -> void {
+		fn main() -> void {
 			Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
 			return;
 		}
-		entry_point vertex as "main" = vtx_main;
 	`,
 	fragment: `
-		[[location 0]] var<out> outColor : vec4<f32>;
-		fn frag_main() -> void {
+		[[location(0)]] var<out> outColor : vec4<f32>;
+		[[stage(fragment)]]
+		fn main() -> void {
 			outColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);
 			return;
 		}
-		entry_point fragment as "main" = frag_main;
 	`
 };
 

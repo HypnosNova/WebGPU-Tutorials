@@ -49,29 +49,28 @@ colorBuffer.unmap();
 顶点着色器
 
 ```wgsl
-[[builtin position]] var<out> out_position : vec4<f32>;
-[[location 0]] var<out> out_color : vec3<f32>;
-[[location 0]] var<in> a_position : vec2<f32>;
-[[location 1]] var<in> a_color : vec3<f32>;
-
+[[builtin(position)]] var<out> out_position : vec4<f32>;
+[[location(0)]] var<out> out_color : vec3<f32>;
+[[location(0)]] var<in> a_position : vec2<f32>;
+[[location(1)]] var<in> a_color : vec3<f32>;
+[[stage(vertex)]]
 fn vtx_main() -> void {
     out_position = vec4<f32>(a_position, 0.0, 1.0);
     out_color = a_color;
     return;
 }
-entry_point vertex as "main" = vtx_main;
 ```
 
 片段着色器
 
 ```wgsl
-[[location 0]] var<out> fragColor : vec4<f32>;
-[[location 0]] var<in> in_color : vec3<f32>;
+[[location(0)]] var<out> fragColor : vec4<f32>;
+[[location(0)]] var<in> in_color : vec3<f32>;
+[[stage(fragment)]]
 fn frag_main() -> void {
     fragColor = vec4<f32>(in_color, 1.0);
     return;
 }
-entry_point fragment as "main" = frag_main;
 ```
 
 我们再原先顶点着色器代码做了修改，去掉了写死数据，然后用location去标注出入参数的槽位索引。并且将颜色数据原封不动抛出。在片段着色器里接收颜色参数。这个颜色已经被GPU做了插值处理。
